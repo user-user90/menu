@@ -25,5 +25,13 @@ export default {
       type: 'image',
       options: { hotspot: true },
     },
+           // --- الحقل الجديد للترتيب ---
+        {
+            name: "order",
+            type: "number",
+            title: "Order Priority",
+            description: "حدد رقم الترتيب (مثلاً: 1 للمقبلات، 2 للوجبات الرئيسية)",
+        },
+        // -----------------------
   ],
 };

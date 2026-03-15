@@ -2,7 +2,9 @@ import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
+import { notFound } from "next/navigation";
 
+// جلب البيانات من Sanity
 const getData = async (categoryName) => {
   const query = `*[_type == "article" && (categoryes->name == $slug || categoryes->slug.current == $slug)]{
         _id,
@@ -16,8 +18,17 @@ const getData = async (categoryName) => {
 };
 
 async function PageHome({ params }) {
+  // 1. انتظار الـ params (مهم في Next.js 15)
   const { category } = await params;
+  
+  // 2. جلب البيانات
   const data = await getData(category);
+
+  // 3. التحقق من وجود البيانات أو التصنيف
+  if (!data || data.length === 0) {
+    notFound(); // سيظهر صفحة 404 التي أنشأناها
+  }
+
   const bgImage = `/bg-${category}.jpg`;
 
   return (
@@ -50,58 +61,45 @@ async function PageHome({ params }) {
 
         {/* شبكة الأطباق */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-4">
-          {data && data.length > 0 ? (
-            data.map((item, index) => (
-              <div
-                key={item._id}
-                className="flex items-center justify-between border-b border-white/10 pb-4 group hover:bg-white/5 transition-all px-3 rounded-lg"
-              >
-                <div className="flex items-center gap-4">
-                  {/* تم إصلاح المقاسات هنا لتعمل مع Tailwind بشكل صحيح */}
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
-                    <Image
-                      src={item?.imageUrl || "/placeholder.jpg"}
-                      alt={item?.name}
-                      fill
-                      // تحسين الأداء: تحميل أول 6 صور فوراً لرفع تقييم LCP
-                      priority={index < 6} 
-                      // تحسين الحجم: إخبار المتصفح أن الصورة صغيرة جداً (thumbnail)
-                      sizes="(max-width: 768px) 64px, 80px"
-                      className="rounded-full object-cover border-2 border-yellow-600/20 group-hover:border-yellow-500 transition-all duration-300 shadow-xl"
-                    />
-                  </div>
-
-                  {/* النصوص */}
-                  <div>
-                    <h2 className="text-lg md:text-xl font-bold text-white group-hover:text-yellow-500 transition-colors duration-300 leading-tight">
-                      {item?.name}
-                    </h2>
-                    {item.description && (
-                      <p className="text-gray-400 text-xs mt-1 leading-snug line-clamp-2 max-w-[180px] md:max-w-xs">
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
+          {data.map((item, index) => (
+            <div
+              key={item._id}
+              className="flex items-center justify-between border-b border-white/10 pb-4 group hover:bg-white/5 transition-all px-3 rounded-lg"
+            >
+              <div className="flex items-center gap-4">
+                <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
+                  <Image
+                    src={item?.imageUrl || "/placeholder.jpg"}
+                    alt={item?.name}
+                    fill
+                    priority={index < 6} 
+                    sizes="(max-width: 768px) 64px, 80px"
+                    className="rounded-full object-cover border-2 border-yellow-600/20 group-hover:border-yellow-500 transition-all duration-300 shadow-xl"
+                  />
                 </div>
 
-                {/* السعر */}
-                <div className="text-right">
-                  <span className="text-xl md:text-2xl font-black text-yellow-500 flex items-baseline gap-1">
-                    {item?.price}
-                    <span className="text-xs font-normal text-gray-300 uppercase">
-                      DH
-                    </span>
-                  </span>
+                <div>
+                  <h2 className="text-lg flex-wrap md:text-xl font-bold text-white group-hover:text-yellow-500 transition-colors duration-300 leading-tight">
+                    {item?.name}
+                  </h2>
+                  {item.description && (
+                    <p className="text-gray-400 text-xs mt-1 leading-snug line-clamp-2 max-w-[180px] md:max-w-xs">
+                      {item.description}
+                    </p>
+                  )}
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-20">
-              <p className="text-gray-400 text-xl italic tracking-widest text-white/50">
-                قريباً..
-              </p>
+
+              <div className="text-right">
+                <span className="text-xl md:text-2xl font-black text-yellow-500 flex items-baseline gap-1">
+                  {item?.price}
+                  <span className="text-xs font-normal text-gray-300 uppercase">
+                    DH
+                  </span>
+                </span>
+              </div>
             </div>
-          )}
+          ))}
         </div>
       </div>
     </section>

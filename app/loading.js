@@ -14,11 +14,6 @@ export default function Loading() {
           <div className="w-2 h-2 bg-yellow-500 rounded-full shadow-[0_0_10px_#eab308]"></div>
         </div>
       </div>
-
-      {/* نص التحميل */}
-      <h2 className="mt-8 text-white font-medium text-lg tracking-[0.2em] uppercase animate-pulse">
-        جاري جلب القائمة...
-      </h2>
     </div>
   );
 }

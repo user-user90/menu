@@ -3,10 +3,11 @@ import HeroSection from "./_components/(headers)/HeroSection";
 
 const getData = async () => {
   // أزلنا [0] لكي نحصل على كل الأصناف ونستطيع عمل map
-const query = `*[_type == "menuHome"]{
+const query = `*[_type == "menuHome"]| order(order asc){
   _id,
   name,
   "imageUrl": image.asset->url,
+  order,
   "slug": slug.current // أضفنا هذا السطر لجلب الرابط
 }`;
   const data = await client.fetch(query);

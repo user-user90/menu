@@ -14,8 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Modern Menu App",
-  description: "Experience the best dining with our digital menu",
+  title: "DÉLICE MENU | Votre Expérience Gastronomique Digitale",
+  description: "Découvrez notre menu digital interactif. Savourez les meilleurs plats et cocktails de DÉLICE MENU directement sur votre smartphone.",
+  icons: {
+    icon: "/icon.webp", // تأكد من وجود الملف في مجلد public
+    apple: "/icon.webp",
+  },
 };
 
 export default function RootLayout({ children }) {
