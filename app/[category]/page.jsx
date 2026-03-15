@@ -79,19 +79,15 @@ async function PageHome({ params }) {
                 </div>
 
                 <div>
-                  <h2 className="text-lg flex-wrap md:text-xl font-bold text-white group-hover:text-yellow-500 transition-colors duration-300 leading-tight">
+                  <h2 className="text-me md:text-xl font-bold text-white group-hover:text-yellow-500 transition-colors duration-300 leading-tight">
                     {item?.name}
                   </h2>
-                  {item.description && (
-                    <p className="text-gray-400 text-xs mt-1 leading-snug line-clamp-2 max-w-[180px] md:max-w-xs">
-                      {item.description}
-                    </p>
-                  )}
+              
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="text-xl md:text-2xl font-black text-yellow-500 flex items-baseline gap-1">
+                <span className="text-lg md:text-2xl font-black text-yellow-500 flex items-baseline gap-1">
                   {item?.price}
                   <span className="text-xs font-normal text-gray-300 uppercase">
                     DH
