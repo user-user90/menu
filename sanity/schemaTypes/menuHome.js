@@ -1,7 +1,7 @@
 export default {
   name: 'menuHome',
   type: 'document',
-  title: 'Menu Home (الأصناف الرئيسية)',
+  title: 'Menu Home ',
   fields: [
     {
       name: 'name',

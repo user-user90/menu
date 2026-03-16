@@ -1,5 +1,29 @@
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
+// sanity/structure.js
+
 export const structure = (S) =>
   S.list()
-    .title('Content')
-    .items(S.documentTypeListItems())
+    .title('DÉLICE MENU - لوحة التحكم')
+    .items([
+      // 1. عرض الأصناف (بدون المسودات في القائمة الرئيسية)
+      S.listItem()
+        .title('الأصناف (Categories)')
+        .child(
+          S.documentList()
+            .title('جميع الأصناف')
+            .filter('_type == "categoryes" && !(_id in path("drafts.**"))')
+        ),
+
+      // 2. عرض الأطباق (بدون المسودات في القائمة الرئيسية)
+      S.listItem()
+        .title('الأطباق (Articles)')
+        .child(
+          S.documentList()
+            .title('قائمة الأطباق')
+            .filter('_type == "article" && !(_id in path("drafts.**"))')
+        ),
+
+      // إخفاء أي ملفات أخرى تلقائياً
+      ...S.documentTypeListItems().filter(
+        (listItem) => !['categoryes', 'article'].includes(listItem.getId())
+      ),
+    ]);

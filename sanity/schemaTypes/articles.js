@@ -1,6 +1,6 @@
 export default {
   name: 'article',
-  title: 'الأطباق (Articles)',
+  title: 'Articles',
   type: 'document',
   fields: [
     {
