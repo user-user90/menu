@@ -6,7 +6,7 @@ export const structure = (S) =>
     .items([
       // 1. عرض الأصناف (بدون المسودات في القائمة الرئيسية)
       S.listItem()
-        .title('الأصناف (Categories)')
+        .title('Categories')
         .child(
           S.documentList()
             .title('جميع الأصناف')
@@ -15,7 +15,7 @@ export const structure = (S) =>
 
       // 2. عرض الأطباق (بدون المسودات في القائمة الرئيسية)
       S.listItem()
-        .title('الأطباق (Articles)')
+        .title('Articles')
         .child(
           S.documentList()
             .title('قائمة الأطباق')
