@@ -45,7 +45,7 @@ async function PageHome({ params }) {
         <div className="inline-flex items-center gap-1 border-b border-white/20 hover:border-yellow-500 transition-colors mb-6 group">
           <LuArrowLeft className="text-white group-hover:text-yellow-500 transition-colors" />
           <Link href={"/"} className="font-bold text-sm text-white group-hover:text-yellow-500 transition-colors pr-2">
-            Home
+            Accueil
           </Link>
         </div>
 

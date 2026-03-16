@@ -2,7 +2,7 @@
 
 export const structure = (S) =>
   S.list()
-    .title('DÉLICE MENU - لوحة التحكم')
+    .title('DÉLICE MENU ')
     .items([
       // 1. عرض الأصناف (بدون المسودات في القائمة الرئيسية)
       S.listItem()
