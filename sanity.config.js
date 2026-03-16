@@ -31,15 +31,33 @@ export default defineConfig({
     structureTool({structure}),
     visionTool({defaultApiVersion: apiVersion}),
   ],
-  // --- الجزء الذكي للتحكم في الظهور ---
+  // --- الحل السحري لإخفاء زر Manage وروابط سانيتي الخارجية ---
   studio: {
     components: {
-      navbar: (props) => {
-        // نتحقق إذا كان المستخدم الحالي ليس هو أنت (صاحب المشروع)
-        // ملاحظة: سانيتي لا تعطي "الرتبة" مباشرة هنا، لذا الأفضل
-        // هو إخفاء عناصر معينة عبر CSS للمستخدمين العاديين.
-        return props.renderDefault(props)
-      },
+      layout: (props) => (
+        <>
+          <style>{`
+            /* إخفاء زر Manage Project تماماً */
+            [data-testid="package-status-manage-button"],
+            [data-testid="context-menu-manage-project"],
+            a[href*="sanity.io/manage"] {
+              display: none !important;
+            }
+
+            /* إخفاء شعار سانيتي والقوائم التي تفتح روابط خارجية */
+            [data-testid="navbar-help-menu"],
+            [data-testid="action-menu-button"] {
+              display: none !important;
+            }
+              
+            /* تنظيف الشريط العلوي ليبقى فقط اسم العميل دون إضافات */
+            [data-testid="navbar-search"] {
+              display: none !important;
+            }
+          `}</style>
+          {props.renderDefault(props)}
+        </>
+      ),
     },
   },
 })
