@@ -3,6 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 import { notFound } from "next/navigation";
+import HokAddCart from "./_components/HokAddCart";
+import { FaShoppingBag } from "react-icons/fa";
+import CartLength from "./_components/CartLength";
+
 
 // جلب البيانات من Sanity
 const getData = async (categoryName) => {
@@ -33,7 +37,7 @@ async function PageHome({ params }) {
 
   return (
     <section
-      className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="relative w-full min-h-screen  bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{
         backgroundImage: `url('${bgImage}'), url('/default-bg.jpg')`,
       }}
@@ -41,15 +45,21 @@ async function PageHome({ params }) {
       <div className="absolute inset-0 bg-black/85 backdrop-blur-[2px]"></div>
 
       <div className="relative z-10 container mx-auto px-4 py-8 md:py-12">
-        {/* زر العودة */}
-        <div className="inline-flex items-center gap-1 border-b border-white/20 hover:border-yellow-500 transition-colors mb-6 group">
+        <div className="flex justify-between  ">
+        {/* return Home  */}
+        <Link href={"/"} className="inline-flex items-center gap-1 border-b border-white/20 hover:border-yellow-500 transition-colors mb-6 group">
           <LuArrowLeft className="text-white group-hover:text-yellow-500 transition-colors" />
-          <Link href={"/"} className="font-bold text-sm text-white group-hover:text-yellow-500 transition-colors pr-2">
+          <span className="font-bold text-sm text-white group-hover:text-yellow-500 transition-colors pr-2">
             Accueil
-          </Link>
-        </div>
-
-        {/* العنوان */}
+          </span>
+        </Link>
+       {/* ## icon shop */}
+<div className="relative inline-flex  items-center justify-center">
+    <FaShoppingBag className="text-white text-2xl md:text-3xl" />
+    <CartLength  /> 
+</div>
+      </div>
+        {/* Title */}
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-5xl font-black text-yellow-500 uppercase tracking-widest border-b-2 border-yellow-500 w-fit mx-auto pb-3 mb-2">
             {category}
@@ -66,7 +76,7 @@ async function PageHome({ params }) {
               key={item._id}
               className="flex items-center justify-between border-b border-white/10 pb-4 group hover:bg-white/5 transition-all px-3 rounded-lg"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex  items-center gap-4">
                 <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
                   <Image
                     src={item?.imageUrl || "/placeholder.jpg"}
@@ -76,6 +86,8 @@ async function PageHome({ params }) {
                     sizes="(max-width: 768px) 64px, 80px"
                     className="rounded-full object-cover border-2 border-yellow-600/20 group-hover:border-yellow-500 transition-all duration-300 shadow-xl"
                   />
+                  {/* ## icon add */}
+                  <HokAddCart item={item}/>
                 </div>
 
                 <div>
