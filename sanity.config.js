@@ -34,6 +34,7 @@ export default defineConfig({
   // --- الحل السحري لإخفاء زر Manage وروابط سانيتي الخارجية ---
   studio: {
     components: {
+       navbar: () => null, 
       layout: (props) => (
         <>
           <style>{`

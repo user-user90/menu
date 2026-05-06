@@ -55,7 +55,7 @@ async function PageHome({ params }) {
         </Link>
        {/* ## icon shop */}
 <div className="relative inline-flex  items-center justify-center">
-    <FaShoppingBag className="text-white text-2xl md:text-3xl" />
+    <FaShoppingBag className="text-red-600 text-2xl md:text-3xl" />
     <CartLength  /> 
 </div>
       </div>

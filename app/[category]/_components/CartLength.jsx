@@ -10,7 +10,7 @@ export default function CartLength() {
   if ( cart.length === 0) return null;
 
   return (
-    <span className="absolute  -top-2 right-4  text-white text-[8px] font-black w-4 h-4 flex items-center justify-center rounded-full border border-black shadow-lg">
+    <span className="absolute text-2xl -top-1 right-4 bg-black p-2  text-white text-[8px] font-black w-4 h-4 flex items-center justify-center rounded-full border border-black shadow-lg">
       {cart.length}
     </span>
   );

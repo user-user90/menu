@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "./_components/(headers)/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,10 +26,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     // أضفنا suppressHydrationWarning لتجنب أخطاء التباين بين السيرفر والمتصفح
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning >
+      
       <body
+        
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950`}
       >
+       
         {children}
       </body>
     </html>
